@@ -15,7 +15,7 @@ def parse_envs():
     run_environment = os.getenv("RUN_ENV")
 
     if run_environment:
-        with open("../config.toml", "r") as tml:
+        with open("config.toml", "r") as tml:
             cfg = toml.load(tml)
         return run_environment, cfg[run_environment]
     else:
