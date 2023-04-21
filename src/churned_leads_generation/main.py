@@ -24,6 +24,10 @@ def execute():
         # Insert model_updates
         insert_lead_churns(engine=engine)
 
+        # Update upd_inc_job_cntl
+
+        upd_inc_job_cntl(engine=engine)
+
     except Exception as e:
         logger.error(f"EXCEPTION! {e}")
 
