@@ -10,12 +10,11 @@ def insert_lead_churns(engine):
 
 def upd_inc_job_cntl(engine) -> None:
     job_type = 'churned_lead_generation'
-    extract_date = extract_date
     des = 'Incremental load extract for Churned Lead Generation'
     flag = 'Y'
     query = "INSERT INTO incremental_job_cntl(job_type,last_extract_dt,description,created_at,flag) VALUES (%s,%s,%s,%s,%s)"
 
     with engine.begin() as conn:  # TRANSACTION
         #print("insert")
-        conn.execute(query, (job_type, extract_date, des, datetime.now(), flag))
+        conn.execute(query, (job_type, datetime.now(), des, datetime.now(), flag))
         #conn.execute(query)
