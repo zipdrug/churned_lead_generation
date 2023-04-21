@@ -23,7 +23,7 @@ def execute():
         engine = make_engine(db_env=DB_ENV)
 
         # Insert model_updates
-        ChurnedLeads.insert_lead_churns()
+        ChurnedLeads.insert_lead_churns(engine=engine)
 
     except Exception as e:
         logger.error(f"EXCEPTION! {e}")
