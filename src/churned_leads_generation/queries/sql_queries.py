@@ -38,7 +38,7 @@ select
 first_name,
 last_name,
 p.patient_id as patient_id,
-'999' as assigned_user_id,
+'182' as assigned_user_id,
 null as filtered_out,
 null as filtered_by_user_id,
 now() as created_at,
