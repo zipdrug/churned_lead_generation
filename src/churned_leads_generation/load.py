@@ -11,9 +11,9 @@ class ChurnedLeads:
         self.des = 'Incremental load extract for Churned Lead Generation'
         self.flag = 'Y'
 
-    def insert_lead_churns(self, engine):
+    def insert_lead_churns(self):
         print("Churned leads Insert")
-        conn = engine.connect()
+        conn = self.engine.connect()
         conn.execute(INSERT_LEAD_CHURNS_DATA_SQL)
         return None
 
