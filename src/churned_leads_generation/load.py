@@ -1,5 +1,6 @@
 import pandas as pd
 import json
+from datetime import datetime
 from queries.sql_queries import INSERT_LEAD_CHURNS_DATA_SQL
 
 def insert_lead_churns(engine):
