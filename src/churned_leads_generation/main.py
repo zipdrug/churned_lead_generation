@@ -4,7 +4,7 @@ import pandas as pd
 import load
 from utility.db import make_engine
 from utility.utils import parse_envs, create_logger
-from load import insert_lead_churns, upd_inc_job_cntl
+#from load import insert_lead_churns, upd_inc_job_cntl
 
 
 os.environ["AWS_DEFAULT_REGION"] = "us-east-1"
