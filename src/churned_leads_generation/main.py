@@ -1,10 +1,9 @@
 import boto3
 import os
 import pandas as pd
-#import load
 from utility.db import make_engine
 from utility.utils import parse_envs, create_logger
-from load import ChurnedLeads
+from load import insert_lead_churns
 
 
 os.environ["AWS_DEFAULT_REGION"] = "us-east-1"
@@ -23,7 +22,7 @@ def execute():
         engine = make_engine(db_env=DB_ENV)
 
         # Insert model_updates
-        ChurnedLeads.insert_lead_churns()
+        insert_lead_churns(engine=engine)
 
     except Exception as e:
         logger.error(f"EXCEPTION! {e}")
