@@ -1,0 +1,27 @@
+[development]
+DB_ENV = "zipdrug-development-db"
+TOPIC_NAME = "LGS-Topic-Development"
+QUEUE_NAME = "LGS-Queue-Development"
+AWS_ACC_ID = "362857707617"
+AWS_REGION = "us-east-1"
+
+[stage]
+DB_ENV = "zipdrug-stage-db"
+TOPIC_NAME = "LGS-Topic-Staging"
+QUEUE_NAME = "LGS-Queue-Staging"
+AWS_ACC_ID = "362857707617"
+AWS_REGION = "us-east-1"
+
+[sit]
+DB_ENV = "zipdrug-sit-db"
+TOPIC_NAME = "LGS-Topic-SIT"
+QUEUE_NAME = "LGS-Queue-SIT"
+AWS_ACC_ID = "362857707617"
+AWS_REGION = "us-east-1"
+
+[production]
+DB_ENV = "production-api-db"
+TOPIC_NAME = "LGS-Topic-Production"
+QUEUE_NAME = "LGS-Queue-Production"
+AWS_ACC_ID = "362857707617"
+AWS_REGION = "us-east-1"
