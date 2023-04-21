@@ -16,6 +16,6 @@ def upd_inc_job_cntl(engine) -> None:
     query = "INSERT INTO incremental_job_cntl(job_type,last_extract_dt,description,created_at,flag) VALUES (%s,%s,%s,%s,%s)"
 
     with engine.begin() as conn:  # TRANSACTION
-        #print("insert")
+        print("Updating incremental job control table")
         conn.execute(query, (job_type, datetime.now(), des, datetime.now(), flag))
         #conn.execute(query)
