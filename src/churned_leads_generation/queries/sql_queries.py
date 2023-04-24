@@ -39,12 +39,11 @@ and mu.enroll_status = p.enroll_status
 """
 
 
-
 CHECK_EXISTING_PATIENT_SQL = """
 SELECT PATIENT_ID FROM LEAD_CHURNS LC WHERE PATIENT_ID = '{patient_id}'
 """
 
-UPDATE_LEAD_CHURNS_SQL= """ """
+UPDATE_LEAD_CHURNS_SQL = """ UPDATE LEAD_CHURNS SET CREATED_AT = NOW(), UPDATED_AT = NOW() WHERE PATIENT_ID = '{PATIENT_ID}' """
 
 INSERT_LEAD_CHURNS_DATA_SQL = """
 insert into lead_churns (first_name,last_name,patient_id,assigned_user_id,filtered_out,filtered_by_user_id,created_at,updated_at,deleted_at)
@@ -99,6 +98,11 @@ join job_cnt jc on mu.created_at > jc.last_extract_dt
 where mu.created_at > jc.last_extract_dt
 and mu.enroll_status = p.enroll_status
 """
+
+INSERT_TABLE_DATA_SQL = """
+INSERT INTO LEAD_CHURNS (FIRST_NAME,LAST_NAME,PATIENT_ID,ASSIGNED_USER_ID,FILTERED_OUT,FILTERED_BY_USER_ID,CREATED_AT,UPDATED_AT,DELETED_AT)
+VALUES ('{fname}','{lname}','{patient_id}','182',NULL, NULL,NOW(),NOW(),NULL) """
+
 
 UPDATE_INCREMENTAL_CONTROL_TABLE_SQL = """
 INSERT INTO incremental_job_cntl(job_type,last_extract_dt,description,created_at,flag) VALUES ('{job_type}',now(),'{description}',now(),'{flag}')

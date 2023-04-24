@@ -1,11 +1,11 @@
 import pandas as pd
 import json
 from datetime import datetime
-from queries.sql_queries import INSERT_LEAD_CHURNS_DATA_SQL, UPDATE_INCREMENTAL_CONTROL_TABLE_SQL, CHECK_EXISTING_PATIENT_SQL, GET_PATIENT_ID_SQL
+from queries.sql_queries import INSERT_LEAD_CHURNS_DATA_SQL, UPDATE_INCREMENTAL_CONTROL_TABLE_SQL, CHECK_EXISTING_PATIENT_SQL, GET_PATIENT_ID_SQL, INSERT_TABLE_DATA_SQL
 
 def insert_lead_churns(engine):
     print("Checking if patient_id already exists in lead_churns table...")
-    query = GET_PATIENT_ID_SQL
+    query = INSERT_LEAD_CHURNS_DATA_SQL
     patient_id_df = pd.read_sql(sql=query, con=engine)
     print("patient_id_df", patient_id_df)
     len_patient_id_df = len(patient_id_df)
@@ -19,17 +19,23 @@ def insert_lead_churns(engine):
             check_query = CHECK_EXISTING_PATIENT_SQL.format(patient_id=patient_id_df['patient_id'][ind])
             exist_df = pd.read_sql(sql=check_query, con=engine)
             if len(exist_df) > 0:
-                print("Patient_id already exists in table")
-                print("Updating values..")
-                pass
+                print("Patient_id already exists in table, updating..")
+                update_query = UPDATE_LEAD_CHURNS_SQL.format(patient_id=patient_id_df['patient_id'][ind])
+                conn = engine.connect
+                conn.execute(update_query)
+            else:
+                print("New entry for churned leads")
+                insert_query = INSERT_TABLE_DATA_SQL.format(fname=patient_id_df['first_name'][ind], lname=patient_id_df['last_name'][ind], patient_id=patient_id_df['patient_id'][ind])
+                conn = engine.connect
+                conn.execute(insert_query)
         return None
 
     else:
-        print("New inserts..")
-    print("Churned leads Insert")
-    conn = engine.connect()
-    conn.execute(INSERT_LEAD_CHURNS_DATA_SQL)
-    return patient_id_df
+        print("No entries to insert for churned leads..")
+    #print("Churned leads Insert")
+    #conn = engine.connect()
+    #conn.execute(INSERT_LEAD_CHURNS_DATA_SQL)
+    #return patient_id_df
 
 def upd_inc_job_cntl(engine) -> None:
     job_type = 'churned_lead_generation'
