@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 from datetime import datetime
-from queries.sql_queries import INSERT_LEAD_CHURNS_DATA_SQL, UPDATE_INCREMENTAL_CONTROL_TABLE_SQL, CHECK_EXISTING_PATIENT_SQL, GET_PATIENT_ID_SQL, INSERT_TABLE_DATA_SQL
+from queries.sql_queries import INSERT_LEAD_CHURNS_DATA_SQL, UPDATE_INCREMENTAL_CONTROL_TABLE_SQL, CHECK_EXISTING_PATIENT_SQL, GET_PATIENT_ID_SQL, INSERT_TABLE_DATA_SQL, UPDATE_LEAD_CHURNS_SQL
 
 def insert_lead_churns(engine) -> None:
     print("Checking if patient_id already exists in lead_churns table...")
