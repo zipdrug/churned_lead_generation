@@ -15,7 +15,7 @@ def insert_lead_churns(engine):
         print("Checking if patient_id's already exists in table...")
         for ind in patient_id_df.index:
             print("loop:", ind)
-            print("value", patient_id_df.iloc[[ind]], patient_id_df['patient_id'][ind])
+            print("value", patient_id_df['patient_id'][ind])
             check_query = CHECK_EXISTING_PATIENT_SQL.format(patient_id=patient_id_df['patient_id'][ind])
             exist_df = pd.read_sql(sql=check_query, con=engine)
             if len(exist_df) > 0:
