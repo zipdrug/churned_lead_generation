@@ -51,3 +51,7 @@ join job_cnt jc on mu.created_at > jc.last_extract_dt
 where mu.created_at > jc.last_extract_dt
 and mu.enroll_status = p.enroll_status
 """
+
+UPDATE_INCREMENTAL_CONTROL_TABLE_SQL = """
+INSERT INTO incremental_job_cntl(job_type,last_extract_dt,description,created_at,flag) VALUES ('{job_type}',now(),'{description}',now(),'{flag}')
+"""

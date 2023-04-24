@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 from datetime import datetime
-from queries.sql_queries import INSERT_LEAD_CHURNS_DATA_SQL
+from queries.sql_queries import INSERT_LEAD_CHURNS_DATA_SQL, UPDATE_INCREMENTAL_CONTROL_TABLE_SQL
 
 def insert_lead_churns(engine):
     print("Churned leads Insert")
@@ -13,9 +13,11 @@ def upd_inc_job_cntl(engine) -> None:
     job_type = 'churned_lead_generation'
     des = 'Incremental load extract for Churned Lead Generation'
     flag = 'Y'
-    query = "INSERT INTO incremental_job_cntl(job_type,last_extract_dt,description,created_at,flag) VALUES (%s,%s,%s,%s,%s)"
+    query = UPDATE_INCREMENTAL_CONTROL_TABLE_SQL.format(job_type=job_type, description=des, flag=flag)
+    #query = "INSERT INTO incremental_job_cntl(job_type,last_extract_dt,description,created_at,flag) VALUES (%s,%s,%s,%s,%s)"
 
     with engine.begin() as conn:  # TRANSACTION
         print("Updating incremental job control table")
-        conn.execute(query, (job_type, datetime.now(), des, datetime.now(), flag))
+        conn.execute(query)
+        #conn.execute(UPDATE_INCREMENTAL_CONTROL_TABLE_SQL, (job_type, datetime.now(), des, datetime.now(), flag))
         #conn.execute(query)
