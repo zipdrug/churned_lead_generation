@@ -43,7 +43,7 @@ CHECK_EXISTING_PATIENT_SQL = """
 SELECT PATIENT_ID FROM LEAD_CHURNS LC WHERE PATIENT_ID = '{patient_id}'
 """
 
-UPDATE_LEAD_CHURNS_SQL = """ UPDATE LEAD_CHURNS SET CREATED_AT = NOW(), UPDATED_AT = NOW() WHERE PATIENT_ID = '{PATIENT_ID}' """
+UPDATE_LEAD_CHURNS_SQL = """ UPDATE LEAD_CHURNS SET CREATED_AT = NOW(), UPDATED_AT = NOW() WHERE PATIENT_ID = '{patient_id}' """
 
 INSERT_LEAD_CHURNS_DATA_SQL = """
 --insert into lead_churns (first_name,last_name,patient_id,assigned_user_id,filtered_out,filtered_by_user_id,created_at,updated_at,deleted_at)
