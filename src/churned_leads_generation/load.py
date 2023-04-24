@@ -8,6 +8,15 @@ def insert_lead_churns(engine):
     query = GET_PATIENT_ID_SQL
     patient_id_df = pd.read_sql(sql=query, con=engine)
     print("patient_id_df", patient_id_df)
+    len_patient_id_df = len(patient_id_df)
+
+    if len_enroll_status_df > 0:
+        print("Checking if patient_id's already exists in table...")
+        for ind in patient_id_df.index:
+            print("value", patient_id_df[ind], patient_id_df.iloc[ind])
+
+    else:
+        print("New inserts..")
     print("Churned leads Insert")
     conn = engine.connect()
     conn.execute(INSERT_LEAD_CHURNS_DATA_SQL)
