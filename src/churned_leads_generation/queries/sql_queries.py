@@ -1,4 +1,52 @@
-INSERT_LEAD_CHURNS_DATA_SQL= """
+GET_PATIENT_ID_SQL="""
+with job_cnt as (
+select
+max(last_extract_dt) as last_extract_dt
+from
+incremental_job_cntl ijc
+where
+job_type = 'churned_lead_generation'
+and flag = 'Y')
+
+,patients_ext as (
+select 
+p.id as patient_id,
+cast(p.enroll_status as varchar(255)) as enroll_status
+from patients p 
+
+)
+
+,model_update as (
+SELECT 
+patient_id,
+created_at,
+updated_at, 
+Replace(cast(new_fields -> 'enroll_status' AS varchar(255)),'"','')  as enroll_status
+from
+model_updates mu 
+where
+cast (new_fields -> 'enroll_status' as varchar(255)) = '"churned"'
+)
+
+select 
+p.patient_id as patient_id
+from 
+model_update mu
+join patients_ext p on p.patient_id= mu.patient_id
+join job_cnt jc on mu.created_at > jc.last_extract_dt
+where mu.created_at > jc.last_extract_dt
+and mu.enroll_status = p.enroll_status
+"""
+
+
+
+CHECK_EXISTING_PATIENT_SQL = """
+SELECT PATIENT_ID FROM LEAD_CHURNS LC WHERE PATIENT_ID = '{patient_id}'
+"""
+
+UPDATE_LEAD_CHURNS_SQL= """ """
+
+INSERT_LEAD_CHURNS_DATA_SQL = """
 insert into lead_churns (first_name,last_name,patient_id,assigned_user_id,filtered_out,filtered_by_user_id,created_at,updated_at,deleted_at)
 
 with job_cnt as (
