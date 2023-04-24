@@ -14,6 +14,7 @@ def insert_lead_churns(engine):
         print("Checking if patient_id's already exists in table...")
         for ind in patient_id_df.index:
             print("value", patient_id_df[ind], patient_id_df.iloc[ind])
+            return patient_id_df[ind]
 
     else:
         print("New inserts..")
