@@ -1,11 +1,11 @@
 import pandas as pd
 import json
 from datetime import datetime
-from queries.sql_queries import INSERT_LEAD_CHURNS_DATA_SQL, UPDATE_INCREMENTAL_CONTROL_TABLE_SQL, CHECK_EXISTING_PATIENT_SQL
+from queries.sql_queries import INSERT_LEAD_CHURNS_DATA_SQL, UPDATE_INCREMENTAL_CONTROL_TABLE_SQL, CHECK_EXISTING_PATIENT_SQL, GET_PATIENT_ID_SQL
 
 def insert_lead_churns(engine):
     print("Checking if patient_id already exists in lead_churns table...")
-    query = INSERT_LEAD_CHURNS_DATA_SQL
+    query = GET_PATIENT_ID_SQL
     patient_id_df = pd.read_sql(sql=query, con=engine)
     print("patient_id_df", patient_id_df)
     print("Churned leads Insert")
