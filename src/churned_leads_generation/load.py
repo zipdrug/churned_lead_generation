@@ -35,7 +35,7 @@ def insert_lead_churns(engine):
     #print("Churned leads Insert")
     #conn = engine.connect()
     #conn.execute(INSERT_LEAD_CHURNS_DATA_SQL)
-    return None
+    return 0
 
 def upd_inc_job_cntl(engine) -> None:
     job_type = 'churned_lead_generation'
