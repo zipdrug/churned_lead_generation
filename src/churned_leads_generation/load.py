@@ -21,12 +21,12 @@ def insert_lead_churns(engine) -> None:
             if len(exist_df) > 0:
                 print("Patient_id already exists in table, updating..")
                 update_query = UPDATE_LEAD_CHURNS_SQL.format(patient_id=patient_id_df['patient_id'][ind])
-                conn = engine.connect
+                conn = engine.connect()
                 conn.execute(update_query)
             else:
                 print("New entry for churned leads")
                 insert_query = INSERT_TABLE_DATA_SQL.format(fname=patient_id_df['first_name'][ind], lname=patient_id_df['last_name'][ind], patient_id=patient_id_df['patient_id'][ind])
-                conn = engine.connect
+                conn = engine.connect()
                 conn.execute(insert_query)
         return None
 
