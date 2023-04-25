@@ -37,7 +37,7 @@ def execute():
 
     except Exception as e:
         logger.error(f"EXCEPTION! {e}")
-        #print(traceback.format_exc())
+        print(traceback.format_exc())
 
 
 if __name__ == "__main__":
