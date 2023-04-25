@@ -6,15 +6,16 @@ from queries.sql_queries import GET_CHURNED_LEADS_DATA_SQL, CHECK_EXISTING_PATIE
 
 # Function to fetch Churned Leads Data, Check if already exists in table then update if not Make a new entry into lead_churns
 def insert_lead_churns(engine) -> None:
-    print("Checking if patient_id already exists in lead_churns table...")
+    print("Fetching Churned Leads..")
     query = GET_CHURNED_LEADS_DATA_SQL
     patient_id_df = pd.read_sql(sql=query, con=engine)
     len_patient_id_df = len(patient_id_df)
+    print("Total Number of Churned Leads found:", len(patient_id_df))
 
     if len_patient_id_df > 0:
-        print("Checking if patient_id's already exists in table...")
+        print("Checking if patient_id's already exists in table", )
         for ind in patient_id_df.index:
-            print("loop:", ind, "patient_id:", patient_id_df['patient_id'][ind])
+            print(ind, ":Checking if patient_id:", patient_id_df['patient_id'][ind], "already exists in table..")
             check_query = CHECK_EXISTING_PATIENT_SQL.format(patient_id=patient_id_df['patient_id'][ind])
             exist_df = pd.read_sql(sql=check_query, con=engine)
             if len(exist_df) > 0:
@@ -23,12 +24,10 @@ def insert_lead_churns(engine) -> None:
                 conn = engine.connect()
                 conn.execute(update_query)
             else:
-                print("New entry for churned leads")
+                print("It's a new record, Inserting into lead_churns table..")
                 insert_query = INSERT_LEAD_CHURNS_SQL.format(fname=patient_id_df['first_name'][ind], lname=patient_id_df['last_name'][ind], patient_id=patient_id_df['patient_id'][ind])
                 conn = engine.connect()
                 conn.execute(insert_query)
-        #return None
-
     else:
         print("No entries to insert for churned leads..")
 
