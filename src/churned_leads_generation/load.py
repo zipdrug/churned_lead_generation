@@ -20,7 +20,8 @@ def insert_lead_churns(engine) -> None:
             exist_df = pd.read_sql(sql=check_query, con=engine)
             if len(exist_df) > 0:
                 print("Patient_id already exists in table, updating..")
-                update_query = UPDATE_LEAD_CHURNS_SQL.format(patient_id=patient_id_df['patient_id'][ind])
+                update_query = UPDATE_LEAD_CHURNS_SQL.format(patient_id=patient_id_df['patient_id'][ind], plantype=patient_id_df['plan_type'][ind],
+                                                             state=patient_id_df['state'][ind], payerid=patient_id_df['payer_id'][ind])
                 conn = engine.connect()
                 conn.execute(update_query)
             else:
