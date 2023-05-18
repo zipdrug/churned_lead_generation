@@ -29,7 +29,7 @@ RUN apt-get update \
 
 # install poetry - respects $POETRY_VERSION & $POETRY_HOME
 #RUN curl -sSL https://raw.githubusercontent.com/zipdrug/poetry/master/get-poetry.py | python
-RUN curl -sSL https://install.python-poetry.org | python3 - --version 1.1.15
+RUN curl -sSL https://install.python-poetry.org | python3 - --version 1.3.2
 
 # set poetry in PATH
 #ENV PATH="${PATH}:/root/.poetry/bin:${POETRY_HOME}"
