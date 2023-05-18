@@ -25,7 +25,8 @@ def insert_lead_churns(engine) -> None:
                 conn.execute(update_query)
             else:
                 print("It's a new record, Inserting into lead_churns table..")
-                insert_query = INSERT_LEAD_CHURNS_SQL.format(fname=patient_id_df['first_name'][ind], lname=patient_id_df['last_name'][ind], patient_id=patient_id_df['patient_id'][ind])
+                insert_query = INSERT_LEAD_CHURNS_SQL.format(fname=patient_id_df['first_name'][ind], lname=patient_id_df['last_name'][ind], patient_id=patient_id_df['patient_id'][ind],
+                                                             plantype=patient_id_df['plan_type'][ind], state=patient_id_df['state'][ind], payerid=patient_id_df['payer_id'][ind])
                 conn = engine.connect()
                 conn.execute(insert_query)
     else:
