@@ -1,0 +1,1 @@
+docker build --tag zipdrug/churned_lead_generation:development --file Dockerfile . --target development
